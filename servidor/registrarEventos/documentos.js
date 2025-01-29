@@ -4,7 +4,7 @@ import {
     excluirDocumento,
 } from "../db/documentosDb.js";
 
-function registrarEventosDocumentos(socket, io) {
+function registrarEventosDocumento(socket, io) {
     socket.on("selecionar_documento", async (nomeDocumento, devolverTexto) => {
         socket.join(nomeDocumento);
 
@@ -32,4 +32,4 @@ function registrarEventosDocumentos(socket, io) {
     });
 }
 
-export { registrarEventosDocumentos };
+export { registrarEventosDocumento };

@@ -4,21 +4,21 @@ import { gerarJwt } from "../utils/gerarJwt.js";
 
 
 function registrarEventosLogin(socket, io) {
-    socket.on('autenticar-usuario', async (dados) => {
-        const usuario = await encontrarUsuario(dados.nome);
+    socket.on("autenticar_usuario", async ({ nome, senha }) => {
+        const usuario = await encontrarUsuario(nome);
 
         if (usuario) {
-            const autenticado = autenticarUsuario(dados.senha, usuario);
+            const autenticado = autenticarUsuario(senha, usuario);
 
             if (autenticado) {
-                const tokenJwt = gerarJwt({ nomeUsuario: usuario.nome });
+                const tokenJwt = gerarJwt({ nomeUsuario: nome });
 
-                socket.emit('autenticacao-sucesso', { nome: usuario.nome }, tokenJwt);
+                socket.emit("autenticacao_sucesso", tokenJwt);
             } else {
-                socket.emit('autenticacao-erro');
+                socket.emit("autenticacao_erro");
             }
         } else {
-            socket.emit('usuario-nao-encontrado');
+            socket.emit("usuario_nao_encontrado");
         }
     });
 }

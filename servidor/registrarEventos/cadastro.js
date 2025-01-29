@@ -8,12 +8,12 @@ function registrarEventosCadastro(socket, io) {
             const resultado = await cadastrarUsuario(dados);
 
             if (resultado.acknowledged) {
-                socket.emit("cadastrar_sucesso");
+                socket.emit("cadastro_sucesso");
             } else {
-                socket.emit("cadastrar_erro");
+                socket.emit("cadastro_erro");
             }
         } else {
-            socket.emit("usuario_existente");
+            socket.emit("usuario_ja_existente");
         }
     });
 }
